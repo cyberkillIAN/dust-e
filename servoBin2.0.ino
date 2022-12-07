@@ -3,13 +3,13 @@ Servo servo;
 //konstanter
 const int TRIG_PIN = 9; // Arduino pin koblet til Ultrasonic Sensor TRIG pin
 const int ECHO_PIN = 8; // Arduino pin koblet til Ultrasonic Sensor ECHO pin
-const int servoPin = 13;
+const int servoPin = 13; // Arduino pin koblet til servoen
 const int LED_PIN  = 2; // Arduino pin koblet til LED pin
 
 
 const int maxAvstand = 5; // Avstand til sensor i cm
 
-// variabler:
+// Variabler for varighet av signal og distansen til sensoren
 float duration;
 float distance_cm;
 
