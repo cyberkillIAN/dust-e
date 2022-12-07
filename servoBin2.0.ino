@@ -1,25 +1,25 @@
-#include <Servo.h>        //servo library
+#include <Servo.h>        //servo bibliotek
 Servo servo;
 //konstanter
-const int TRIG_PIN = 9; // Arduino pin connected to Ultrasonic Sensor's TRIG pin
-const int ECHO_PIN = 8; // Arduino pin connected to Ultrasonic Sensor's ECHO pin
+const int TRIG_PIN = 9; // Arduino pin koblet til Ultrasonic Sensor TRIG pin
+const int ECHO_PIN = 8; // Arduino pin koblet til Ultrasonic Sensor ECHO pin
 const int servoPin = 13;
-const int LED_PIN  = 2; // Arduino pin connected to LED's pin
+const int LED_PIN  = 2; // Arduino pin koblet til LED pin
 
 
-const int maxAvstand = 5; // centimeters
+const int maxAvstand = 5; // Avstand til sensor i cm
 
 // variabler:
 float duration;
 float distance_cm;
 
 void setup() {
-  	Serial.begin (9600);       // initialize serial port
+  	Serial.begin (9600);       // Initialisere serial port
 	  servo.attach(servoPin);
 
-  	pinMode(TRIG_PIN, OUTPUT); // set arduino pin to output mode
-  	pinMode(ECHO_PIN, INPUT);  // set arduino pin to input mode
-  	pinMode(LED_PIN, OUTPUT);  // set arduino pin to output mode
+  	pinMode(TRIG_PIN, OUTPUT); // sett arduino pin til output mode
+  	pinMode(ECHO_PIN, INPUT);  // sett arduino pin til input mode
+  	pinMode(LED_PIN, OUTPUT);  // sett arduino pin til output mode
 
 	  servo.write(0);         //servoen skal lukke lokket
 	    delay(100);
@@ -27,20 +27,20 @@ void setup() {
 }
 
 void loop() {
-  // generate 10-microsecond pulse to TRIG pin
+  // generere 10-mikrosekund puls til TRIG pin
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
 
-  // measure duration of pulse from ECHO pin
+  // måle varighet av pulsen fra ECHO pin
   duration = pulseIn(ECHO_PIN, HIGH);
-  // calculate the distance
+  // regner ut distansen
   distance_cm = ((0.034 * duration)/2);
    Serial.println(distance_cm);  
   
-
+  // hvis distansen er mindre enn den maksimale avstanden vil lyspæren lyse opp
   if(distance_cm < maxAvstand){
-    digitalWrite(LED_PIN, HIGH); // turn on LED
+    digitalWrite(LED_PIN, HIGH); // LED lyser opp
 
      delay(1);
      servo.write(0);  
@@ -49,7 +49,7 @@ void loop() {
      delay(1000);
   }
   else{
-      digitalWrite(LED_PIN, LOW); // turn off LED
+      digitalWrite(LED_PIN, LOW); // LED slås av
   }
 
   delay(500);
